@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Armário 2</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <link rel="icon" href="../../images/logoD3.png">
+</head> 
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="../../index.html">Controle de Máquininhas</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/pages/armario1/armario1.html">Armário 1</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/pages/armario2/armario2.html">Armário 2</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/armario3/armario3.html">Armário 3</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/EstoqueAB/EstoqueAB.html">Estoque AB</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/noCliente/noCliente.html">No Cliente</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/EstoqueExterior/EstoqueExterior.html">Estoque Exterior</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/DefeitoExterior/DefeitoExterior.html">Defeito Exterior</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/defeitos/defeitos.html">Defeitos</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/Historico/historico.html">Histórico</a>
+          </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/pages/cadastro/cadastro.html">Cadastro</a>
+            </li> -->
+          </ul>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalSimNao" tabindex="-1" aria-labelledby="modalSimNaoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalSimNaoLabel">Você realmente quer mover para o Armário 1?</h5>
+          <button type="button" class="btn-danger" data-bs-dismiss="modal" aria-label="Close">x</button>
+        </div>
+        <div class="modal-body">
+          <label for="inputOperadora">Qual a operadora desta maquininha?</label>
+          <select class="form-select" id="InputOperadora">
+            <option selected hidden>Escolha...</option>
+            <option id="claro" value="CLARO">
+              CLARO
+            </option>
+            <option id="vivo" value="VIVO">
+              VIVO
+            </option>
+            <option id="na" value="N.A">
+              N.A
+            </option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="sim" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
+          <button type="button" id="nao" class="btn btn-danger">Não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalEnviarDefeito" tabindex="-1" aria-labelledby="modalEnviarDefeitoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEnviarDefeitoLabel">Você realmente quer mover para Defeito?</h5>
+          <button type="button" class="btn-danger" data-bs-dismiss="modal" aria-label="Close">x</button>
+        </div>
+        <div class="modal-body">
+          <label for="inputCaixa">Em qual caixa irá colocar a maquininha?</label>
+          <select class="form-select" id="inputCaixa">
+            <option selected hidden>Escolha...</option>
+            <option id="cx1" value="CX1">
+              CX1
+            </option>
+            <option id="cx2" value="CX2">
+              CX2
+            </option>
+            <option id="cx3" value="CX3">
+              CX3
+            </option>
+          </select>
+          <br>
+          <br>
+          <label for="inputMotivo">Qual o motivo do defeito?</label>
+          <select class="form-select" id="inputMotivo">
+            <option selected hidden>Escolha...</option>
+            <option id="pedTampered" value="Ped Tampered">
+              Ped Tampered
+            </option>
+            <option id="erroNaLeituraDoCartao" value="Erro na leitura do cartão">
+              Erro na leitura do cartão
+            </option>
+            <option id="touch" value="Touch">
+              Touch
+            </option>
+            <option id="conectorComDefeito" value="Conector com defeito">
+              Conector com defeito
+            </option>
+            <option id="conectividadeDeChips" value="Conectividade de chips">
+              Conectividade de chips
+            </option>
+            <option id="estetica" value="Estética">
+              Estética
+            </option>
+            <option id="defeitoDeImpressao" value="Defeito de Impressão">
+              Defeito de Impressão
+            </option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="inputSim" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
+          <button type="button" id="inputNao" class="btn btn-danger">Não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row text-center mt-3 ml-1">
+    <div class="col-8">
+      <table id="tabela" class="table table-hover table-striped text-center">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Modelo</th>
+            <th>Status</th>
+            <th>Situação</th>
+            <th>Local</th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table mr-5 mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Modelo</th>
+            <th scope="col">Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>D3 - PRO 1</td>
+            <td id="d3Pro1"></td>
+          </tr>
+          <tr>
+            <td>D3 - PRO 2</td>
+            <td id="d3Pro2"></td>
+          </tr>
+          <tr>
+            <td>D3 - PRO REFURBISHED</td>
+            <td id="d3ProRefurbished"></td>
+          </tr>
+          <tr>
+            <td>D3 - SMART</td>
+            <td id="d3Smart"></td>
+          </tr>
+          <tr>
+            <td>D3 - X</td>
+            <td id="d3X"></td>
+          </tr>
+            <td class="font-weight-bolder">Total Geral</td>
+            <td id="total"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="armario2.js"></script>
+  <script src="../../scripts/requests.js"></script>
+  <script src="../../scripts/createSelectForms.js"></script>
+</body>
+</html>
