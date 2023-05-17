@@ -36,6 +36,22 @@ function fetchData(url) {
     });
   };
 
+  function moverParaDevolucao(serial){
+    let botaoSim = document.getElementById("botaoSimDevolucao");
+    let selectCaixa = document.getElementById("selectCaixa");
+
+    selectCaixa.addEventListener("change", function(){
+      botaoSim.addEventListener("click", function(){
+        let url = "http://localhost:11032/api/Defeitos/MoverParaDevolucao";
+        let params = JSON.stringify({
+            "serial": serial,
+            "caixa": selectCaixa.value
+        });
+        fazPostBody(url, params)
+      });
+    });
+  }
+
   async function main() {
     try {
       const defeitos = await fetchData('http://localhost:11032/api/Defeitos');
@@ -69,6 +85,7 @@ function fetchData(url) {
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalAlterarMotivo" id="alterarMotivo" onclick="alterarMotivo('${row.serial}')">Alterar Motivo</button></li>
+                  <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalMoverParaDevolucao" id="moverParaDevolucao" onclick="moverParaDevolucao('${row.serial}')">Mover Para Devolução</button></li>
                 </ul>
               </div>
               `;

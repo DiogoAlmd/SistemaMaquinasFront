@@ -195,27 +195,14 @@ function moverParaEE(serial){
   let botaoSim = document.getElementById("botaoSim");
   let selectLocalEstrangeiro = document.getElementById("selectLocalEstrangeiro");
 
-  selectLocalEstrangeiro.addEventListener('change', function(){
-    const selectedOption = selectLocalEstrangeiro.value;
-    console.log(`Opção selecionada: ${selectedOption}`);
-    
-    botaoSim.addEventListener('click', function(){
-      let request = new XMLHttpRequest();
-      let url = "http://localhost:11032/api/Armario1/MoverParaEstoqueExterior";
+  botaoSim.addEventListener("click", function(){
+    let url = "http://localhost:11032/api/Armario1/MoverParaEstoqueEstrangeiro";
       let params = JSON.stringify({
           "serial": serial,
-          "local": selectedOption
+          "local": selectLocalEstrangeiro.value
       });
-      request.open("POST", url, true);
-      request.setRequestHeader("Content-type", "application/json");
-      request.onreadystatechange = function() {
-          if (request.readyState === 4 && request.status === 200) {
-              location.reload();
-          }
-      };
-      request.send(params);
-    })
-  })
+      fazPostBody(url, params)
+  });
 }
 
 async function main() {
