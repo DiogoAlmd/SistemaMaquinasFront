@@ -21,14 +21,14 @@ function fetchData(url) {
 
   function alterarMotivo(serial){
     let botaoSim = document.getElementById("botaoSimMotivo");
-    let selectLocalEstrangeiro = document.getElementById("selectLocalEstrangeiro");
+    let selectNovoMotivo = document.getElementById("selectCaixaDevolucao");
 
-    selectLocalEstrangeiro.addEventListener("change", function(){
+    selectNovoMotivo.addEventListener("change", function(){
       botaoSim.addEventListener("click", function(){
         let url = "http://localhost:11032/api/Defeitos/AlterarMotivo";
         let params = JSON.stringify({
             "serial": serial,
-            "novoMotivo": selectLocalEstrangeiro.value
+            "novoMotivo": selectNovoMotivo.value
         });
 
         fazPut(url, params)
@@ -108,6 +108,8 @@ function fetchData(url) {
       const conectividadeDeChipsNum = document.getElementById('conectividadeDeChipsNum');
       const esteticaNum = document.getElementById('esteticaNum');
       const defeitoDeImpressaoNum = document.getElementById('defeitoDeImpressaoNum');
+      const tecladoValue = document.getElementById('tecladoValue');
+      const telaQuebradaValue = document.getElementById('telaQuebradaValue');
       const total = document.getElementById('total');
 
       pedTamperedNum.innerHTML = data[0].pedTampered;
@@ -117,7 +119,10 @@ function fetchData(url) {
       conectividadeDeChipsNum.innerHTML = data[0].conectividadeDeChips;
       esteticaNum.innerHTML = data[0].estetica;
       defeitoDeImpressaoNum.innerHTML = data[0].defeitoDeImpressao;
+      tecladoValue.innerHTML = data[0].teclado;
+      telaQuebradaValue.innerHTML = data[0].telaQuebrada;
       total.innerHTML = data[0].total;
+      console.log(teclado);
     }catch(error){
       console.log(error);
     }
